@@ -1,0 +1,43 @@
+doctype html
+html
+    head
+        title Knowledgebase
+        link(rel = 'stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        link(rel = 'stylesheet' href='/css/style.css')
+    body
+        nav.navbar.navbar-expand-lg.navbar-light.bg-light
+            .container
+                a.navbar-brand(href='/') KnowledgeBase
+                button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarNav', aria-controls='navbarNav', aria-expanded='false', aria-label='Toggle navigation')
+                    span.navbar-toggler-icon
+                #navbarNav.collapse.navbar-collapse
+                    ul.navbar-nav
+                        li.nav-item
+                            a.nav-link(href='/') Home 
+                        if user
+                            li.nav-item
+                                a.nav-link(href='/articles/add') Add Articles
+                    ul.navbar-nav.navbar-right
+                        if user 
+                            li 
+                                a.nav-link(href='/users/logout') Logout
+                        else
+                            li.nav-item
+                                a.nav-link(href='/users/register') Register
+                            li.nav-item
+                                a.nav-link(href='/users/login') Login
+
+        .container
+            br
+            != messages('message',locals)
+            if errors
+                each error, i in errors
+                    div(class="alert alert-danger") #{error.msg}
+            block content
+            br
+            hr
+            footer
+                p copyright &copy; 2017
+        script(src='/bower_components/jquery/dist/jquery.js')
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/main.js')
